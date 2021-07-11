@@ -1,11 +1,11 @@
 package main
 
 import (
-//"bufio"
-//"fmt"
-//"os"
-//"strconv"
-//"strings"
+	//"bufio"
+	//"fmt"
+	//"os"
+	"strconv"
+	//"strings"
 )
 
 type fraction struct {
@@ -61,6 +61,14 @@ func CalcDiv(a fraction, b fraction) fraction {
 	res.numerator /= c
 	res.denominator /= c
 	return res
+}
+
+func String2Fraction(str string) fraction {
+	n1, err := strconv.ParseInt(str, 10, 64)
+	if err == nil {
+		return fraction{int(n1), 1}
+	}
+	return fraction{0, 0}
 }
 
 func main() {

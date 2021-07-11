@@ -52,3 +52,16 @@ func Test06(t *testing.T) {
 		t.Errorf("test case 06 failed, output %d/%d", res.numerator, res.denominator)
 	}
 }
+
+func Test08(t *testing.T) {
+	s := &Stack{
+		maxNum: 10,
+		top:    -1,
+	}
+	a := fraction{1, 8}
+	s.Push(a)
+	b, _ := s.Pop()
+	if a != b {
+		t.Errorf("test case 08 failed, output %d/%d", b.numerator, b.denominator)
+	}
+}
