@@ -65,3 +65,27 @@ func Test08(t *testing.T) {
 		t.Errorf("test case 08 failed, output %d/%d", b.numerator, b.denominator)
 	}
 }
+
+func Test09(t *testing.T) {
+	a := RPN("1 2 +")
+	b := fraction{3, 1}
+	if a != b {
+		t.Errorf("test case 09 failed, output %d/%d", a.numerator, a.denominator)
+	}
+}
+
+func Test10(t *testing.T) {
+	a := RPN("1 2 / 3 5 / +")
+	b := fraction{11, 10}
+	if a != b {
+		t.Errorf("test case 10 failed, output %d/%d", a.numerator, a.denominator)
+	}
+}
+
+func Test11(t *testing.T) {
+	a := RPN("1 2 / 3 5 / + 1 11 / *")
+	b := fraction{1, 10}
+	if a != b {
+		t.Errorf("test case 11 failed, output %d/%d", a.numerator, a.denominator)
+	}
+}

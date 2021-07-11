@@ -1,1 +1,1 @@
-go run rpn.go
+go run rpn.go stack.go

@@ -1,11 +1,11 @@
 package main
 
 import (
-	//"bufio"
-	//"fmt"
-	//"os"
+	"bufio"
+	"fmt"
+	"os"
 	"strconv"
-	//"strings"
+	"strings"
 )
 
 type fraction struct {
@@ -71,6 +71,46 @@ func String2Fraction(str string) fraction {
 	return fraction{0, 0}
 }
 
-func main() {
+func RPN(rpn string) fraction {
+	var res fraction
+	arr := strings.Split(rpn, " ")
+	opt := &Stack{
+		maxNum: 10,
+		top:    -1,
+	}
+	a, b := fraction{0, 0}, fraction{0, 0}
+	for _, value := range arr {
+		nuop := String2Fraction(value)
+		temper := fraction{0, 0}
+		if nuop == temper {
+			a, _ = opt.Pop()
+			b, _ = opt.Pop()
+			switch value {
+			case "+":
+				res = CalcAdd(b, a)
+			case "*":
+				res = CalcMul(b, a)
+			case "/":
+				res = CalcDiv(b, a)
+			}
+			opt.Push(res)
+		} else {
+			opt.Push(nuop)
+		}
+	}
+	a, _ = opt.Pop()
+	return a
+}
 
+func main() {
+	var r = bufio.NewScanner(os.Stdin)
+	var rpn string
+	r.Scan()
+	rpn = r.Text()
+	res := RPN(rpn)
+	if res.denominator == 1 {
+		fmt.Printf("%d\n", res.numerator)
+	} else {
+		fmt.Printf("%d/%d\n", res.numerator, res.denominator)
+	}
 }
