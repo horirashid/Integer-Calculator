@@ -53,6 +53,16 @@ func Test06(t *testing.T) {
 	}
 }
 
+func Test07(t *testing.T) {
+	a := fraction{3, 5}
+	b := fraction{2, 4}
+	c := fraction{1, 10}
+	res := CalcSub(a, b)
+	if res != c {
+		t.Errorf("test case 07 failed, output %d/%d", res.numerator, res.denominator)
+	}
+}
+
 func Test08(t *testing.T) {
 	s := &Stack{
 		maxNum: 10,
@@ -87,5 +97,21 @@ func Test11(t *testing.T) {
 	b := fraction{1, 10}
 	if a != b {
 		t.Errorf("test case 11 failed, output %d/%d", a.numerator, a.denominator)
+	}
+}
+
+func Test12(t *testing.T) {
+	a := RPN("1 2 -")
+	b := fraction{-1, 1}
+	if a != b {
+		t.Errorf("test case 12 failed, output %d/%d", a.numerator, a.denominator)
+	}
+}
+
+func Test13(t *testing.T) {
+	a := RPN("5 6 + 4 2 - /")
+	b := fraction{11, 2}
+	if a != b {
+		t.Errorf("test case 13 failed, output %d/%d", a.numerator, a.denominator)
 	}
 }

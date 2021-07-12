@@ -44,7 +44,16 @@ func CalcAdd(a fraction, b fraction) fraction {
 	res.denominator /= temp
 	return res
 }
-
+func CalcSub(a fraction, b fraction) fraction {
+	var res fraction
+	var temp int
+	res.numerator = a.numerator*b.denominator - a.denominator*b.numerator
+	res.denominator = a.denominator * b.denominator
+	temp = gcd(res.numerator, res.denominator)
+	res.numerator /= temp
+	res.denominator /= temp
+	return res
+}
 func CalcMul(a fraction, b fraction) fraction {
 	var newN = a.numerator * b.numerator
 	var newD = a.denominator * b.denominator
@@ -88,6 +97,8 @@ func RPN(rpn string) fraction {
 			switch value {
 			case "+":
 				res = CalcAdd(b, a)
+			case "-":
+				res = CalcSub(b, a)
 			case "*":
 				res = CalcMul(b, a)
 			case "/":
